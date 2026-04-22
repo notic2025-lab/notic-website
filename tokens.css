@@ -1,0 +1,53 @@
+/* NOTIC — design tokens */
+:root {
+  --bg: #F4F1EC;
+  --bg-2: #EAE5DC;
+  --ink: #111111;
+  --ink-2: #1a1a1a;
+  --muted: #6b6660;
+  --line: #1111111a;
+  --line-strong: #11111133;
+  --accent: oklch(0.55 0.18 255); /* deep blue default */
+  --accent-ink: #ffffff;
+
+  --serif: "Shippori Mincho", "Noto Serif JP", "Times New Roman", serif;
+  --sans: "Inter", "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Noto Sans JP", sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  --pad-x: clamp(20px, 4vw, 72px);
+  --rule: 1px solid var(--line);
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 15px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  font-feature-settings: "palt";
+}
+a { color: inherit; text-decoration: none; }
+button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; padding: 0; }
+img, svg { display: block; max-width: 100%; }
+
+.mono { font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+.serif { font-family: var(--serif); font-weight: 400; }
+.rule { border: 0; border-top: var(--rule); margin: 0; }
+.rule-strong { border: 0; border-top: 1px solid var(--line-strong); margin: 0; }
+
+.container { padding-inline: var(--pad-x); }
+.grid-12 { display: grid; grid-template-columns: repeat(12, 1fr); gap: 20px; }
+
+/* reveal */
+[data-reveal] { opacity: 0; transform: translateY(16px); transition: opacity .9s cubic-bezier(.2,.7,.2,1), transform .9s cubic-bezier(.2,.7,.2,1); }
+[data-reveal].is-in { opacity: 1; transform: none; }
+/* safety net: if JS fails to run for any reason, after 2s reveal everything */
+@keyframes noticFallbackReveal { to { opacity: 1; transform: none; } }
+[data-reveal] { animation: noticFallbackReveal 0.01s linear 2s forwards; }
+[data-reveal].is-in { animation: none; }
+
+::selection { background: var(--accent); color: var(--accent-ink); }
